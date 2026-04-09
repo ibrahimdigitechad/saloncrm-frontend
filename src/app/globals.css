@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand: #0B5ED7;
+  --brand-light: #eff6ff;
+  --radius: 8px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+
+/* ── FullCalendar overrides ── */
+.fc .fc-toolbar-title { font-size: 1rem !important; font-weight: 600; }
+.fc .fc-button { background: #0B5ED7 !important; border-color: #0B5ED7 !important; font-size: 13px !important; }
+.fc .fc-button:hover { background: #1d4ed8 !important; }
+.fc-event { cursor: pointer; font-size: 12px !important; }
+.fc-timegrid-slot { height: 40px !important; }
