@@ -1,11 +1,11 @@
 'use client';
 import { ButtonHTMLAttributes, InputHTMLAttributes, HTMLAttributes, SelectHTMLAttributes, TextareaHTMLAttributes, forwardRef } from 'react';
 
-export function Button({ className = '', variant = 'primary', size = 'md', loading, children, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary' | 'secondary' | 'danger' | 'ghost'; size?: 'sm' | 'md' | 'lg'; loading?: boolean }) {
-  const base = 'inline-flex items-center justify-center font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
-  const variants = { primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500', secondary: 'bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 focus:ring-blue-500', danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500', ghost: 'text-slate-600 hover:bg-slate-100 focus:ring-slate-500' };
-  const sizes = { sm: 'px-3 py-1.5 text-sm', md: 'px-4 py-2 text-sm', lg: 'px-6 py-3 text-base' };
-  return <button className={`${base} ${variants[variant]} ${sizes[size]} ${className}`} disabled={loading || props.disabled} {...props}>{loading ? <span className="animate-spin mr-2">⏳</span> : null}{children}</button>;
+export function Button({ className = '', variant = 'primary', size = 'md', loading, children, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'primary'|'secondary'|'danger'|'ghost'; size?: 'sm'|'md'|'lg'; loading?: boolean }) {
+  const base = 'inline-flex items-center gap-1.5 justify-center font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+  const variants = { primary:'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500', secondary:'bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 focus:ring-blue-500', danger:'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500', ghost:'text-slate-600 hover:bg-slate-100 focus:ring-slate-500' };
+  const sizes = { sm:'px-3 py-1.5 text-sm', md:'px-4 py-2 text-sm', lg:'px-6 py-3 text-base' };
+  return <button className={`${base} ${variants[variant]} ${sizes[size]} ${className}`} disabled={loading || props.disabled} {...props}>{loading && <svg className="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/></svg>}{children}</button>;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement> & { label?: string; error?: string; hint?: string }>(({ label, error, hint, className = '', ...props }, ref) => (
@@ -27,10 +27,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<H
 ));
 Textarea.displayName = 'Textarea';
 
-export const Select = forwardRef<HTMLSelectElement, SelectHTMLAttributes<HTMLSelectElement> & { label?: string; error?: string }>(({ label, error, className = '', ...props }, ref) => (
+export const Select = forwardRef<HTMLSelectElement, SelectHTMLAttributes<HTMLSelectElement> & { label?: string; error?: string; options?: { value: string; label: string }[] }>(({ label, error, options, className = '', children, ...props }, ref) => (
   <div className="w-full">
     {label && <label className="block text-sm font-medium text-slate-700 mb-1">{label}</label>}
-    <select ref={ref} className={`block w-full rounded-lg border px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${error ? 'border-red-500' : 'border-slate-300'} ${className}`} {...props} />
+    <select ref={ref} className={`block w-full rounded-lg border px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${error ? 'border-red-500' : 'border-slate-300'} ${className}`} {...props}>
+      {options ? options.map(o => <option key={o.value} value={o.value}>{o.label}</option>) : children}
+    </select>
     {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
   </div>
 ));
@@ -40,17 +42,20 @@ export function Card({ className = '', children, ...props }: HTMLAttributes<HTML
   return <div className={`bg-white rounded-xl border border-slate-200 shadow-sm ${className}`} {...props}>{children}</div>;
 }
 
-export function Badge({ className = '', variant = 'default', children }: HTMLAttributes<HTMLSpanElement> & { variant?: 'default' | 'success' | 'warning' | 'danger' }) {
-  const variants = { default: 'bg-slate-100 text-slate-700', success: 'bg-green-100 text-green-700', warning: 'bg-yellow-100 text-yellow-700', danger: 'bg-red-100 text-red-700' };
-  return <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${variants[variant]} ${className}`}>{children}</span>;
+export function Badge({ className = '', variant, label, children }: HTMLAttributes<HTMLSpanElement> & { variant?: 'default'|'success'|'warning'|'danger'; label?: string }) {
+  const text = label || children;
+  const auto = typeof text === 'string' ? ({ confirmed:'success', completed:'success', cancelled:'danger', pending:'warning', blocked:'danger' } as any)[text] || 'default' : 'default';
+  const v = variant || auto;
+  const variants = { default:'bg-slate-100 text-slate-700', success:'bg-green-100 text-green-700', warning:'bg-yellow-100 text-yellow-700', danger:'bg-red-100 text-red-700' };
+  return <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${variants[v]} ${className}`}>{text}</span>;
 }
 
-export function Spinner({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
-  const sizes = { sm: 'h-4 w-4', md: 'h-6 w-6', lg: 'h-10 w-10' };
+export function Spinner({ size = 'md' }: { size?: 'sm'|'md'|'lg' }) {
+  const sizes = { sm:'h-4 w-4', md:'h-6 w-6', lg:'h-10 w-10' };
   return <svg className={`animate-spin text-blue-600 ${sizes[size]}`} fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/></svg>;
 }
 
-export function StatCard({ title, label, value, icon: Icon, sub, trend, color, className = '' }: { title?: string; label?: string; value: string | number; icon?: any; sub?: string; trend?: string; color?: string; className?: string }) {
+export function StatCard({ title, label, value, icon: Icon, sub, trend, className = '' }: { title?: string; label?: string; value: string|number; icon?: any; sub?: string; trend?: string; color?: string; className?: string }) {
   return (
     <div className={`bg-white rounded-xl border border-slate-200 shadow-sm p-6 ${className}`}>
       <div className="flex items-center justify-between mb-2">
@@ -63,10 +68,10 @@ export function StatCard({ title, label, value, icon: Icon, sub, trend, color, c
   );
 }
 
-export function EmptyState({ title, description, action }: { title: string; description?: string; action?: React.ReactNode }) {
+export function EmptyState({ title, description, action, icon: Icon }: { title: string; description?: string; action?: React.ReactNode; icon?: any }) {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
-      <div className="text-4xl mb-4">📭</div>
+      <div className="text-blue-200 mb-4">{Icon ? <Icon size={48} /> : <span className="text-4xl">📭</span>}</div>
       <h3 className="text-lg font-semibold text-slate-700">{title}</h3>
       {description && <p className="text-sm text-slate-400 mt-1 max-w-sm">{description}</p>}
       {action && <div className="mt-4">{action}</div>}
@@ -74,12 +79,13 @@ export function EmptyState({ title, description, action }: { title: string; desc
   );
 }
 
-export function Modal({ open, onClose, title, children }: { open: boolean; onClose: () => void; title?: string; children: React.ReactNode }) {
+export function Modal({ open, onClose, title, children, size = 'md' }: { open: boolean; onClose: () => void; title?: string; children: React.ReactNode; size?: 'sm'|'md'|'lg'|'xl' }) {
   if (!open) return null;
+  const sizes = { sm:'max-w-sm', md:'max-w-md', lg:'max-w-lg', xl:'max-w-2xl' };
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/50" onClick={onClose}/>
-      <div className="relative bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
+      <div className={`relative bg-white rounded-xl shadow-xl w-full ${sizes[size]} max-h-[90vh] overflow-y-auto p-6`}>
         {title && <h2 className="text-lg font-semibold text-slate-800 mb-4">{title}</h2>}
         {children}
       </div>
