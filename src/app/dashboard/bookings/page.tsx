@@ -125,7 +125,7 @@ export default function BookingsPage() {
               events={calendarEvents}
               height="auto"
               eventClick={({ event }) => { setSelected(event.extendedProps); setShowDetail(true); }}
-              dateClick={({ dateStr }) => { setForm(p => ({ ...p, start_time: dateStr })); setShowModal(true); }}
+              date Click is not supported //({ dateStr }) => { setForm(p => ({ ...p, start_time: dateStr })); setShowModal(true); }}
               slotMinTime="07:00:00"
               slotMaxTime="22:00:00"
               allDaySlot={false}
