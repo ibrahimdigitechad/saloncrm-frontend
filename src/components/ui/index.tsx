@@ -50,15 +50,15 @@ export function Spinner({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
   return <svg className={`animate-spin text-blue-600 ${sizes[size]}`} fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/></svg>;
 }
 
-export function StatCard({ title, value, icon, trend }: { title: string; value: string | number; icon?: React.ReactNode; trend?: string }) {
+export function StatCard({ title, label, value, icon: Icon, sub, trend, color, className = '' }: { title?: string; label?: string; value: string | number; icon?: any; sub?: string; trend?: string; color?: string; className?: string }) {
   return (
-    <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+    <div className={`bg-white rounded-xl border border-slate-200 shadow-sm p-6 ${className}`}>
       <div className="flex items-center justify-between mb-2">
-        <p className="text-sm font-medium text-slate-500">{title}</p>
-        {icon && <div className="text-blue-600">{icon}</div>}
+        <p className="text-sm font-medium text-slate-500">{label || title}</p>
+        {Icon && <div className="text-blue-600"><Icon size={20} /></div>}
       </div>
       <p className="text-2xl font-bold text-slate-800">{value}</p>
-      {trend && <p className="text-xs text-slate-400 mt-1">{trend}</p>}
+      {(sub || trend) && <p className="text-xs text-slate-400 mt-1">{sub || trend}</p>}
     </div>
   );
 }
