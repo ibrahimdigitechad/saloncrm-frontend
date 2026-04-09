@@ -1,4 +1,5 @@
 @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -28,3 +29,4 @@ body {
 .fc .fc-button:hover { background: #1d4ed8 !important; }
 .fc-event { cursor: pointer; font-size: 12px !important; }
 .fc-timegrid-slot { height: 40px !important; }
+
