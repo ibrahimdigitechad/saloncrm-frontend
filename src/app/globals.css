@@ -1,54 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap');
+
+:root {
+  --brand: #1A1A1A;
+  --brand-light: #F5F4F0;
+  --radius: 10px;
+
+  /* Stat card backgrounds */
+  --card-orange: #FFF3E8;
+  --card-blue:   #EAF0FF;
+  --card-purple: #EDE8FF;
+  --card-green:  #E8F8EE;
+
+  /* Stat card accent colours */
+  --accent-orange: #E8A86A;
+  --accent-blue:   #7B9EF0;
+  --accent-purple: #9B7EE8;
+  --accent-green:  #5EC481;
 }
 
-html, body {
-  height: 100%;
-  font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+* { box-sizing: border-box; }
+
+body {
   background: #F5F4F0;
   color: #1A1A1A;
+  font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Scrollbar */
+/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #DDDDDD; border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: #DDDDDD; border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: #BBBBBB; }
 
-/* Remove default button styles */
-button { font-family: inherit; }
+/* ── Table row hover ── */
+tbody tr { transition: background 0.1s; }
+tbody tr:hover { background: #F5F7FF !important; }
 
-/* Input resets */
-input, select, textarea {
-  font-family: inherit;
-}
-
-/* Link resets */
-a { color: inherit; }
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-  animation: fadeIn 0.3s ease forwards;
-}
-
-/* Table rows hover */
-tbody tr:hover {
-  background: #F5F7FF !important;
-  transition: background 0.1s;
-}
-
-/* Sidebar link hover */
-.nav-item:hover {
-  background: #F5F4F0 !important;
-}
+/* ── FullCalendar overrides ── */
+.fc .fc-toolbar-title { font-size: 1rem !important; font-weight: 600; }
+.fc .fc-button { background: #1A1A1A !important; border-color: #1A1A1A !important; font-size: 13px !important; border-radius: 8px !important; }
+.fc .fc-button:hover { background: #333 !important; }
+.fc-event { cursor: pointer; font-size: 12px !important; }
+.fc-timegrid-slot { height: 40px !important; }
