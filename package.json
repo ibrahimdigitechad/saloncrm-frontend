@@ -2,12 +2,13 @@
   "name": "saloncrm-frontend",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
+ "scripts": {
+  "postinstall": "chmod +x node_modules/.bin/next",
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint"
+},
   "dependencies": {
     "@fullcalendar/core": "^6.1.11",
     "@fullcalendar/daygrid": "^6.1.11",
@@ -28,6 +29,7 @@
     "tailwind-merge": "^2.2.2",
     "zod": "^3.22.4"
   },
+  
   "devDependencies": {
     "@types/node": "^20.12.7",
     "@types/react": "^18.3.1",
