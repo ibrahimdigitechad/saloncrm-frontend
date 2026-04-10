@@ -239,8 +239,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
               <div style={{
-                width: 36, height: 36, borderRadius: 50%, background: 'linear-gradient(135deg, #C8A882, #8B6B4A)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
+width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg, #C8A882, #8B6B4A)',                display: 'flex', alignItems: 'center', justifyContent: 'center',
                 color: '#FFF', fontSize: 13, fontWeight: 600,
               }}>
                 SA
