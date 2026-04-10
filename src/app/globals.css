@@ -1,32 +1,54 @@
-@tailwind base;
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
-:root {
-  --brand: #0B5ED7;
-  --brand-light: #eff6ff;
-  --radius: 8px;
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-* { box-sizing: border-box; }
-
-body {
-  background: #f8fafc;
-  color: #0f172a;
-  font-family: system-ui, -apple-system, sans-serif;
+html, body {
+  height: 100%;
+  font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  background: #F5F4F0;
+  color: #1A1A1A;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+::-webkit-scrollbar-thumb { background: #DDDDDD; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #BBBBBB; }
 
-/* ── FullCalendar overrides ── */
-.fc .fc-toolbar-title { font-size: 1rem !important; font-weight: 600; }
-.fc .fc-button { background: #0B5ED7 !important; border-color: #0B5ED7 !important; font-size: 13px !important; }
-.fc .fc-button:hover { background: #1d4ed8 !important; }
-.fc-event { cursor: pointer; font-size: 12px !important; }
-.fc-timegrid-slot { height: 40px !important; }
+/* Remove default button styles */
+button { font-family: inherit; }
 
+/* Input resets */
+input, select, textarea {
+  font-family: inherit;
+}
+
+/* Link resets */
+a { color: inherit; }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Table rows hover */
+tbody tr:hover {
+  background: #F5F7FF !important;
+  transition: background 0.1s;
+}
+
+/* Sidebar link hover */
+.nav-item:hover {
+  background: #F5F4F0 !important;
+}
