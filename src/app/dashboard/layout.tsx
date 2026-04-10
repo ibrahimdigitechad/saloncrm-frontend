@@ -1,5 +1,4 @@
 'use client';
-import { AuthProvider } from '@/lib/auth-context';
 import React from 'react';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -257,11 +256,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* Page content */}
         <main style={{ flex: 1, overflowY: 'auto', padding: '28px' }}>
-  <AuthProvider>
-    {children}
-  </AuthProvider>
+          {children}
         </main>
       </div>
     </div>
   );
-} 
+}
