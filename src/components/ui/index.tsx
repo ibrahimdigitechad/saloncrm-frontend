@@ -179,8 +179,8 @@ export function StatCard({ label, value, sub, icon: Icon, color = 'blue' }: {
 }
 
 // ── Empty state ───────────────────────────────────────────
-export function EmptyState({ icon: Icon, title, description, action }: {
-  icon?: React.ComponentType<{ size?: number; className?: string }>; title: string; description?: string; action?: ReactNode;
+export function StatCard({ label, value, sub, icon: Icon, color = 'blue' }: {
+  label: string; value: string | number; sub?: string; icon?: any; color?: string;
 }) {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
