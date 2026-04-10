@@ -124,7 +124,9 @@ export function Badge({ label, variant, className }: { label: string; variant?: 
 }
 
 // ── Modal ─────────────────────────────────────────────────
-export function Modal({ open, onClose, title, children, size = 'md' }: { open: boolean; onClose: () => void; title: string; children: ReactNode; size?: 'sm' | 'md' | 'lg' | 'xl' }) {
+export function Modal({ open, onClose, title, children, size = 'md' }: {
+  open: boolean; onClose: () => void; title: string; children: ReactNode; size?: 'sm' | 'md' | 'lg' | 'xl';
+}) {
   if (!open) return null;
   const widths = { sm: 'max-w-sm', md: 'max-w-md', lg: 'max-w-lg', xl: 'max-w-2xl' };
   return (
@@ -161,7 +163,7 @@ const statBgs: Record<string, { bg: string; accent: string }> = {
 };
 
 export function StatCard({ label, value, sub, icon: Icon, color = 'blue' }: {
-  label: string; value: string | number; sub?: string; icon?: React.ComponentType<{ size?: number; className?: string }>; color?: string;
+  label: string; value: string | number; sub?: string; icon?: any; color?: string;
 }) {
   const { bg, accent } = statBgs[color] || statBgs.blue;
   return (
@@ -171,7 +173,9 @@ export function StatCard({ label, value, sub, icon: Icon, color = 'blue' }: {
       {sub && <p style={{ fontSize: 11, color: '#888', margin: '0 0 10px' }}>{sub}</p>}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
         <div style={{ width: 20, height: 20, borderRadius: '50%', background: accent, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M2 5h6M5 2l3 3-3 3" stroke="#FFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          <svg width="9" height="9" viewBox="0 0 10 10" fill="none">
+            <path d="M2 5h6M5 2l3 3-3 3" stroke="#FFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </div>
       </div>
     </div>
@@ -179,8 +183,8 @@ export function StatCard({ label, value, sub, icon: Icon, color = 'blue' }: {
 }
 
 // ── Empty state ───────────────────────────────────────────
-export function StatCard({ label, value, sub, icon: Icon, color = 'blue' }: {
-  label: string; value: string | number; sub?: string; icon?: any; color?: string;
+export function EmptyState({ icon: Icon, title, description, action }: {
+  icon?: any; title: string; description?: string; action?: ReactNode;
 }) {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
